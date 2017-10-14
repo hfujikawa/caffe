@@ -1,0 +1,158 @@
+4.1 Initialize repository
+$ mkdir gitusers
+$ cd gitusers
+
+$ git init
+
+$ git var GIT_COMMITER_IDENT
+$ git var GIT_AUTHOR_IDENT
+
+
+4.2 First commit
+$ git add .
+$ git commit -m "first commit"
+
+
+4.3 Record changes
+# only changes not recorded
+$ git diff
+# not commited changes
+$ git diff HEAD
+
+# record all files in current dir
+$ git add -u
+
+# comment by editor
+$ git commit
+
+# view changes summary
+$ git status
+
+$ cat >.gitignore << \EOF
+
+# 'git commit -a' = 'git add -u' + 'git commit'
+$ git commit -a -m 'comment'
+
+
+4.5 View changes history
+$ git log
+
+# output patch format
+$ git log -2 -p --pretty=short
+
+# select changes to commit
+$ git add -p
+
+
+5.1 Create backup repository
+$ mkdir -p /pub/repository/gitusers.git
+$ cd /pub/repository/gituusers.git
+$ git --bare init
+
+$ git push /pub/repository/gitusers.git master
+
+$ cd ..
+$ git clone /pub/repository/gitusers.git gitusers.new
+$ cd gitusers.new
+
+$ cd ..
+$ rm -rf gitusers
+$ mv gitusers.new gitusers
+
+$ cd gitusers
+$ edit index.html
+$ git commit -a -m "Be polite for greeting of index.html"
+$ git push
+
+5.2 Prepare 2nd repository
+$ git clone mother:/pub/repository/githusers.git gitusers
+$ cd gitusers
+
+5.3 Merge with parallel development
+$ git push
+
+$ edit index.html
+$ git diff
+
+$ git push
+
+$ git pull
+
+$ git commit -a
+
+
+6.1 Prepare sharing repository
+$ umask 002
+$ mkdir -p /pub/repositories/gitusers.git
+$ cd /pub/repositories/githusers.git
+$ chgrp gitusers .
+$ git --bare init --shared
+
+$ cd $HOME/gitusers
+$ git push /pub/repositories/gitusers.git master
+
+6.2 Clone from sharing repository
+$ cd $HOME
+$ git clone /pub/repositories/gitusers.git gitusers.git
+$ cd gitusers.git
+
+
+7.1 Create branch
+$ git checkout -b phone-fix
+
+$ git branch phone-fix
+$ git checkout phone-fix
+
+7.2 Confirm branch
+$ git branch
+
+7.3 Breed branch
+$ edit index.html
+$ git commit -a 'update phone number'
+
+7.4 Switch branch
+$ git checkout master
+
+$ edit index.html
+$ git commit -a 'update the greeting sentence'
+
+$ git merge phone-fix
+
+$ git pull . phone-fix
+
+
+13.1 Remote repository
+$ git clone git://git.kernel.org/pub/scm/git/git.git
+
+$ git clone http://www.kernel.org/pub/scm/git/git.github
+
+$ git clone git://git.kernel.org/pub/scm/git/git.git
+
+$ cat .git/config
+
+$ git pull git://git.kernel.org/pub/scm/git/git.git master
+
+$ git pull origin
+
+$ git pull
+
+
+
+<Git GUI>
+Windows: Git GUIを使う準備（文字化け対策）
+http://sutara79.hatenablog.com/entry/2015/07/06/113431
+cf. sudo apt-get -y install git-gui
+
+How to ignore files using git-gui (tcl-tk) application?
+https://stackoverflow.com/questions/22046808/how-to-ignore-files-using-git-gui-tcl-tk-application
+
+<Git remote>
+WindowsでLANネットワーク上にリモートGitレポを作成
+http://hennohito.cocolog-nifty.com/blog/2015/10/windowslangit-1.html
+step1. in remote
+$ git init --bare --shared=true
+(git init --bare /z/Git repo/project1 --shared=true)
+step2. in local
+$ git remote add origin /z/Git repo/project1
+$ git push origin master
+cf. sudo apt-get install cifs-utils
