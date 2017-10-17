@@ -156,3 +156,7 @@ step2. in local
 $ git remote add origin /z/Git repo/project1
 $ git push origin master
 cf. sudo apt-get install cifs-utils
+
+<Github>
+ローカルでgitを使用した後、gitHubに登録する方法
+https://qiita.com/koshihikari/items/dcf126fa9c0de2b6fa7e
