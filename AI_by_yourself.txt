@@ -1,0 +1,170 @@
+<dlib>
+Face Detection
+2-2.Preparing
+$ sudo apt install -y build-essential cmake libopenblas-dev libapack-dev libx11-dev
+
+$ wget http://dlib.net/files/dlib-19.4.zip
+$ unzip dlib-19.4.zip
+
+$ cd dlib-19.4/examples
+$ mkdir build
+$ cd build
+$ cmake ..
+$ cmake --build . --config Release
+
+$ cd /home/aiuser/dlib-19.4/examples/build
+$ wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+$ bunzip2 shape_predictor_68_face_landmarks.dat.bz2
+$ cd /home/aiuser/dlib-19.4/examples/build
+
+2-3.Execution
+$ ./face_detection_ex ~/YUKAPAKU3215_TP_V.jpg
+$ ./face_landmark_detection_ex shape_predictor_68_face_landmarks.dat ~/YUKAPAKU3215_TP_V.jpg
+
+2-4.Object Detection except Face
+$ cd ~/dlib-19.4/tools/imglab/build
+$ ./imglab
+(/home/aiuser/dlib-19.4/tools/imglab/build/imglab)
+
+$ ./imglab -c sampledataset.xml ~/dlib_traindata
+$ ./imglab sampledataset.xml
+
+$ gedit sampledataset.xml
+<image file='/home/aiuser/dlib_traindata/train07.png'>
+  <box top='173' left='123' width='300' height='271'> <= remove
+</image>
+$ ./imglab sampledataset.xml
+
+$ ../../../examples/build/train_object_detector -tv sampledataset.xml
+$ ../../../examples/build/train_object_detector ~/dlib_testdata/test01.png
+
+
+<TensorFlow>
+5-1.Try TensorFlow
+$ pip install tensorflow
+$ pip list
+   tensorflow (1.0.0)
+$ ls .local/lib/python2.7/site-packages/tensorflow
+$ wget https://raw.githubusercontents.com/tensorflow/models/master/tutorials/image/imagenet/classify_image.py
+$ source /home/aiuser/dltutorial.sh
+
+$ python classify_image.py --image_file test1.jpg
+$ python classify_image.py --image_file sl.jpg
+$ python classify_image.py --image_file cat.jpg
+
+$ bash imagename.sh test1.jpg
+
+5-2.Programming Deep Learning
+# Startup Python REPL(Read-eval-print loop)
+$ python
+>>> from tensorflow.examples.tutorials.mnist import input_data
+>>> mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+>>> import tensorflow as tf
+>>> x = tf.placeholder(tf.float32, [None, 784])
+>>> W = tf.Variable(tf.zeros([784, 10]))
+>>> b = tf.Variable(tf.zeros([10]))
+>>> y = tf.nn.softmax(tf.matmul(x,W) + b)
+>>> y_ = tf.placeholder(tf.float32, [None, 10])
+>>> cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
+>>> train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
+
+>>> sess = tf.InteractiveSession()
+>>> tf.global_variables_initializer().run()
+>>> for _ in range(1000):
+...   batch_xs, batch_ys = mnist.train.next_batch(100)
+...   sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
+...
+
+>>> correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+>>> accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+>>> print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
+
+$ python mnist_tutorial.py
+
+
+Appendix-3
+Ubuntu basic commands
+1.general commands
+pwd
+cd
+cd data
+cd -
+history
+man ls
+var="Ubuntu"
+echo $var
+export var
+set
+unset
+
+2.file operation commands
+ls
+ls data
+ls -l
+ls -l data
+cp sample sample.org
+cp sample datadir
+cp -r datadir backupdir
+mv foo bar
+mv foo datadir
+mv datadir tempdir
+rm foo.txt
+rm -r tempdir
+rm -rf tempdir
+mkdir newdir
+cat foo.txt
+less foo.txt
+sudo chown aiuser foo.sh
+sudo chown -R aiuser datadir
+sudo chgrp aigroup foo.sh
+sudo chgrp -R aigroup datadir
+sudo chmod 600 foo.txt
+sudo chmod -R -w datadir
+
+3.file compress/extract commands
+gzip foo
+gunzip foo.gz
+bzip2 foo
+bunzip2 foo.bz2
+tar cvf data.tar datadir
+tar cvzf data.tar.gz datadir
+tar cvjf data.tar.bz2 datadir
+tar xvf data.tar
+tar xvzf data.tar.gz
+tar xvzf data.tar.bz2
+
+4.network operation commands
+ip addr show
+wget http://example.com/a.txt
+ssh aiuser@example.com
+scp data.gz aiuser@example.com
+
+5.system management commands
+passwd
+sudo useradd john
+sudo passwd john
+sudo userdel -r john
+free -h
+df -H
+sudo systemctl start apache2
+sudo systemctl restart apache2
+sudo systemctl stop apache2
+sudo systemctl reload apache2
+sudo systemctl is-active apache2
+sudo systemctl enable apache2
+sudo systemctl disable apache2
+
+6.package management commands
+sudo apt update
+sudo apt upgrade
+sudo apt install python
+sudo apt remove python
+apt show python
+apt search python
+
+7. Python package management commands
+sudo apt install python-pip
+pip install chainer
+pip list
+pip search chainer
+pip uninstall chainer
