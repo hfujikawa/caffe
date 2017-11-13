@@ -1,6 +1,12 @@
+<Semantic Segmentation References>
+semanticsegmentation-170216041645.pdf
+onkyo_kansai_slide.pdf
+
 <DeepLabV2>
 DeepLab.7z
 prototxt_and_model.zip
+Init_Models.7z
+DeepLab-LargeFOV.7z
 
 <PSPNet>
 pspnet101_VOC2012.caffemodel
