@@ -1,0 +1,19 @@
+﻿
+<Caffe>
+
+https://software.intel.com/en-us/articles/training-and-deploying-deep-learning-networks-with-caffe-optimized-for-intel-architecture
+Manage Deep Learning Networks with Caffe* Optimized for Intel® Architecture
+
+https://analyticsai.wordpress.com/2017/04/18/caffe%E3%81%AE%E5%B0%8E%E5%85%A5%E3%81%A8single-shot-multibox-detector%E3%81%AE%E5%AE%9F%E8%A1%8C/
+Ubuntu on Windows10へのCaffeの導入とSingle Shot MultiBox Detectorの実行
+
+http://rodriguezandres.github.io/2016/04/28/caffe/
+Training and deploying deep learning networks with Caffe
+
+<Semantic Segmentation>
+
+http://liangchiehchen.com/projects/DeepLab.html
+DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs
+
+http://blog.qure.ai/notes/semantic-segmentation-deep-learning-review
+A 2017 Guide to Semantic Segmentation with Deep Learning
