@@ -1,4 +1,4 @@
-4.1 Initialize repository
+﻿4.1 Initialize repository
 $ mkdir gitusers
 $ cd gitusers
 
@@ -137,6 +137,12 @@ $ git pull origin
 $ git pull
 
 
+<Git Install>
+私家版 Git For Windowsのインストール手順
+https://opcdiary.net/?page_id=27065
+
+WindowsにGitをインストールする
+https://www.granfairs.com/blog/cto/install-git-for-windows
 
 <Git GUI>
 Windows: Git GUIを使う準備（文字化け対策）
