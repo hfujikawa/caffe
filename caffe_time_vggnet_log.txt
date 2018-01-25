@@ -2978,3 +2978,11 @@ I0125 20:33:55.177886    29 caffe.cpp:639] Average Backward pass: 379.758 ms.
 I0125 20:33:55.178447    29 caffe.cpp:641] Average Forward-Backward: 699.9 ms.
 I0125 20:33:55.178743    29 caffe.cpp:644] Total Time: 6999 ms.
 I0125 20:33:55.179352    29 caffe.cpp:645] *** Benchmark ends ***
+
+MobileNet-SSD-windows vs2013+CUDA7.5+cuDNN5.0
+D:\Develop\MobileNet-SSD-windows>time_vgg.cmd
+I0125 21:57:39.538200  7020 caffe.cpp:412] Average Forward pass: 140.062 ms.
+I0125 21:57:39.538200  7020 caffe.cpp:414] Average Backward pass: 141.191 ms.
+I0125 21:57:39.538200  7020 caffe.cpp:416] Average Forward-Backward: 283.997 ms.
+I0125 21:57:39.538200  7020 caffe.cpp:418] Total Time: 2839.97 ms.
+I0125 21:57:39.538200  7020 caffe.cpp:419] *** Benchmark ends ***
