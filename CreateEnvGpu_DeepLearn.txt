@@ -55,8 +55,11 @@ anaconda-navigator
 * TensorFlow 1.2.1 or earlier requires cuDNN 5.1. ('cudnn64_5.dll')
 * TensorFlow 1.3 or later requires cuDNN 6. ('cudnn64_6.dll')
 pip install tensorflow-gpu==1.2.1
+python tensorflow_self_check.py
+pip install keras==2.0.6
 
-
+http://whitecat-student.hatenablog.com/entry/2016/12/28/193156
+Anacondaを用いてPython2とPython3を共存させる方法 (Windows)
 
 conda create -n anaconda2 python=2.7 anaconda
 activate anaconda2
