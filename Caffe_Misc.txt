@@ -1,6 +1,9 @@
 ﻿
 http://course.fast.ai/index.html
 
+http://www.erogol.com/cnn-visualization-tools-techniques/
+Some CNN visualization tools and techniques
+
 http://www.atmarkit.co.jp/ait/articles/1512/16/news020.html
 深層学習の判別精度を向上させるコツとActive Learning
 
