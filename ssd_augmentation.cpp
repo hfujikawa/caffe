@@ -923,6 +923,24 @@ void DrawBBoxOnImage(AnnotatedDatum datum, string filename) {
 	cv::imwrite(filename, img);
 }
 
+void DrawBBoxImage(cv::Mat img, vector<AnnotationGroup> annotation_group, string filename) {
+	for (int g = 0; g < annotation_group.size(); ++g) {
+		const AnnotationGroup& anno_group = annotation_group[g];
+		NormalizedBBox object_bbox;
+		for (int a = 0; a < anno_group.annotation_size(); ++a) {
+			const Annotation& anno = anno_group.annotation(a);
+			object_bbox = anno.bbox();
+			cv::Point pt1, pt2;
+			pt1.x = (img.cols*object_bbox.xmin());
+			pt1.y = (img.rows*object_bbox.ymin());
+			pt2.x = (img.cols*object_bbox.xmax());
+			pt2.y = (img.rows*object_bbox.ymax());
+			cv::rectangle(img, pt1, pt2, cvScalar(0, 0, 255), 3, 8, 0);
+		}
+	}
+	cv::imwrite(filename, img);
+}
+
 
 DEFINE_int32(min_dim, 0,
 	"Minimum dimension images are resized to (keep same aspect ratio)");
@@ -1005,7 +1023,8 @@ void DataAugmentation(cv::Mat img, string img_file) {
 	/*
 	 * Batch Sampler (Cropping)
 	 */
-	AnnotatedDatum* sampled_datum = NULL;
+	//AnnotatedDatum* sampled_datum = NULL;
+	AnnotatedDatum sampled_datum;
 	bool has_sampled = false;
 	if (augment.batch_samplers_.size() > 0) {
 		// Generate sampled bboxes from expand_datum.
@@ -1014,21 +1033,21 @@ void DataAugmentation(cv::Mat img, string img_file) {
 		if (sampled_bboxes.size() > 0) {
 			// Randomly pick a sampled bbox and crop the expand_datum.
 			int rand_idx = caffe_rng_rand() % sampled_bboxes.size();
-			sampled_datum = new AnnotatedDatum();
+			//sampled_datum = new AnnotatedDatum();
 			augment.CropImage(*expand_datum,
 				sampled_bboxes[rand_idx],
-				sampled_datum);
+				&sampled_datum);
 			has_sampled = true;
 		}
 		else {
-			sampled_datum = expand_datum;
+			sampled_datum = *expand_datum;
 		}
 	}
 	else {
-		sampled_datum = expand_datum;
+		sampled_datum = *expand_datum;
 	}
-	DrawBBoxOnImage(*sampled_datum, "crop.png");
-	CHECK(sampled_datum != NULL);
+	DrawBBoxOnImage(sampled_datum, "crop.png");
+	//CHECK(sampled_datum != NULL);
 
 	/*
 	* Resize, Mirror, vertical Flip and Noise
@@ -1039,7 +1058,8 @@ void DataAugmentation(cv::Mat img, string img_file) {
 	Blob<float> transformed_data_;
 	if (true) {
 		AnnotatedDataParameter anno_data_param = augment.layer_param_.annotated_data_param();
-		if (anno_data_param.has_anno_type()) {
+		//if (anno_data_param.has_anno_type()) {
+		if (true) {
 			// Make sure all data have same annotation type.
 			/*CHECK(sampled_datum->has_type()) << "Some datum misses AnnotationType.";
 			if (augment.layer_param_. anno_data_param.has_anno_type()) {
@@ -1051,7 +1071,7 @@ void DataAugmentation(cv::Mat img, string img_file) {
 			} */
 			// Transform datum and annotation_group at the same time
 			transformed_anno_vec.clear();
-			augment.Transform(*sampled_datum,
+			augment.Transform(sampled_datum,
 				&(transformed_data_),
 				&transformed_anno_vec);
 			//if (anno_type_ == AnnotatedDatum_AnnotationType_BBOX) {
@@ -1066,19 +1086,19 @@ void DataAugmentation(cv::Mat img, string img_file) {
 			all_anno[item_id] = transformed_anno_vec;
 		}
 		else {
-			augment.Transform(sampled_datum->datum(),
+			augment.Transform(sampled_datum.datum(),
 				&(transformed_data_));
 			// Otherwise, store the label from datum.
-			CHECK(sampled_datum->datum().has_label()) << "Cannot find any label.";
+			CHECK(sampled_datum.datum().has_label()) << "Cannot find any label.";
 			//top_label[item_id] = sampled_datum->datum().label();
 		}
 	}
 	else {
-		augment.Transform(sampled_datum->datum(),
+		augment.Transform(sampled_datum.datum(),
 			&(transformed_data_));
 	}
-	//DrawBBoxOnImage(*sampled_datum, "result.png");	
 	cv::Mat result_image = cv::imread("resized.png");
+	DrawBBoxImage(result_image, transformed_anno_vec, "resized.png");
 	for (int i = 0; i < transformed_anno_vec.size(); i++) {
 		for (int j = 0; j < transformed_anno_vec[i].annotation_size() ; j++) {
 			;
