@@ -42,11 +42,31 @@ int yaml_write() {
 	return 0;
 }
 
+//frameCount: 5
+//	transform_param :
+//	mirror : true
+//	mean_value : [104, 117, 123]
+//	calibrationDate : "Tue Feb 27 22:00:51 2018\n"
+
 int yaml_read() {
 	FileStorage fs2("test.yml", FileStorage::READ);
 
 	// first method: use (type) operator on FileNode.
 	int frameCount = (int)fs2["frameCount"];
+
+	string mirror = (string)fs2["transform_param"]["mirror"];
+	//FileNode mean_value = fs2["transform_param"]["mean_value"];
+	//FileNodeIterator it = mean_value.begin(), it_end = mean_value.end();
+	//int idx = 0;
+	//std::vector<int> lbpval;
+
+	FileNode tm = fs2["transform_param"];
+
+	vector<int> mean_value;
+	FileNodeIterator ite = tm["mean_value"].begin();
+
+	for (int k = 0; k < 3; k++, ++ite)
+		mean_value.push_back((int)*ite);
 
 	String date;
 	// second method: use FileNode::operator >>
@@ -64,7 +84,7 @@ int yaml_read() {
 	FileNode features = fs2["features"];
 	FileNodeIterator it = features.begin(), it_end = features.end();
 	int idx = 0;
-	std::vector<uchar> lbpval;
+	std::vector<int> lbpval;
 
 	// iterate through a sequence using FileNodeIterator
 	for (; it != it_end; ++it, idx++)
@@ -85,7 +105,7 @@ int yaml_read() {
 
 int main()
 {
-	yaml_write();
+	//yaml_write();
 	yaml_read();
 
 #ifdef TEST1
