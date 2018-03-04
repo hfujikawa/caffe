@@ -28,18 +28,15 @@
 #include "caffe/util/bbox_util.hpp"
 #include "caffe/util/im_transforms.hpp"
 #include "caffe/util/sampler.hpp"
+#include "caffe/data_transformer.hpp"
+#include <boost/property_tree/json_parser.hpp>
 
-char* CLASSES[21] = { "__background__",
-		   "aeroplane", "bicycle", "bird", "boat",
-		   "bottle", "bus", "car", "cat", "chair",
-		   "cow", "diningtable", "dog", "horse",
-		   "motorbike", "person", "pottedplant",
-		   "sheep", "sofa", "train", "tvmonitor" };
 // https://stackoverflow.com/questions/8520560/get-a-file-name-from-a-path
 using ::boost::filesystem::path;
 
-#ifdef USE_OPENCV
 using namespace caffe;  // NOLINT(build/namespaces)
+
+int write_json();
 
 class Augmentation {
 public:
@@ -127,12 +124,51 @@ DEFINE_string(mean_value, "104,117,123",
 	" - would subtract from the corresponding channel). Separated by ','."
 	"Either mean_file or mean_value should be provided, not both.");
 
+int write_batch_sampler(vector<BatchSampler> batch_sampler) {
+	//èëÇ´çûÇ›Ç≈XMLÉtÉ@ÉCÉãÇäJÇ≠
+	cv::FileStorage fs("test.xml", cv::FileStorage::WRITE);
+	if (!fs.isOpened()) {
+		std::cout << "File can not be opened." << std::endl;
+		return -1;
+	}
+
+	//for (int i = 0; i < batch_sampler.size(); i++) {
+	//	BatchSampler batch_sample = batch_sampler[i];
+	//	fs << "BatchSampler" << batch_sample;
+	//}
+	//intå^ÇÃäiî[ï˚ñ@
+	int formatCount = 4;
+	fs << "formatCount" << formatCount;
+
+	//std::stringÇÃäiî[ï˚ñ@
+	std::string imgName = "nantara.bmp";
+	fs << "formatName" << imgName;
+
+	//cv::MatÇÃäiî[ï˚ñ@(âÊëúçsóÒÇÃë„ÇÌÇËÇ…3x3ÇÃçsóÒÇäiî[)
+	cv::Mat ImgMatrix = (cv::Mat_<double>(3, 3) << 100, 0, 320, 0, 100, 240, 0, 0, 1);
+	fs << "ImgMatrix" << ImgMatrix;
+
+	//ÉmÅ[ÉhÇÃçÏê¨
+	//ÉoÉCÉiÉäÉpÉ^Å[ÉìÇÃï€ë∂
+	fs << "features" << "[";
+	for (int i = 0; i < 3; i++) {
+		int x = rand() % 640;
+		int y = rand() % 480;
+	}
+	fs << "]";
+	
+	//èëÇ´èoÇµ
+	fs.release();
+}
+
 /*
  * Augmentation for SSD
  */
 Augmentation::Augmentation(const string& param_file,
 	const string& mean_file,
 	const string& mean_value){
+	// https://www.buildinsider.net/small/opencv/005
+	std::cout << cv::getBuildInformation() << std::endl;
 
 	// Set parameters
 	NetParameter param;
@@ -144,6 +180,20 @@ Augmentation::Augmentation(const string& param_file,
 	for (int i = 0; i < anno_data_param.batch_sampler_size(); ++i) {
 		batch_samplers_.push_back(anno_data_param.batch_sampler(i));
 	}
+	//write_batch_sampler(batch_samplers_);
+	//write_json();
+/*	boost::filesystem::path output_directory(output_directory_);
+	boost::filesystem::path file(output_name_prefix_ + ".json");
+	boost::filesystem::path out_file = output_directory / file;
+	std::ofstream outfile;
+	outfile.open(out_file.string().c_str(), std::ofstream::out);
+
+	//boost::regex exp("\"(null|true|false|-?[0-9]+(\\.[0-9]+)?)\"");
+	boost::property_tree::ptree output;
+	output.add_child("detections", batch_samplers_);
+	std::stringstream ss;
+	write_json(ss, output); */
+
 	//string label_map_file_ = anno_data_param.label_map_file();
 	// Make sure dimension is consistent within batch.
 	param_ = layer_param_.transform_param();
@@ -753,22 +803,6 @@ void Augmentation::ExpandImage(const cv::Mat& img,
 	const bool has_mean_file = param_.has_mean_file();
 	const bool has_mean_values = param_.mean_value_size() > 0;
 
-/*	if (has_mean_file) {
-		CHECK_EQ(img_channels, data_mean_.channels());
-		CHECK_EQ(height, data_mean_.height());
-		CHECK_EQ(width, data_mean_.width());
-		Dtype* mean = data_mean_.mutable_cpu_data();
-		for (int h = 0; h < height; ++h) {
-			uchar* ptr = expand_img->ptr<uchar>(h);
-			int img_index = 0;
-			for (int w = 0; w < width; ++w) {
-				for (int c = 0; c < img_channels; ++c) {
-					int blob_index = (c * height + h) * width + w;
-					ptr[img_index++] = static_cast<char>(mean[blob_index]);
-				}
-			}
-		}
-	} */
 	if (has_mean_values) {
 		vector<float> mean_values;
 		CHECK(param_.mean_value_size() == 1 || param_.mean_value_size() == img_channels) <<
@@ -904,25 +938,6 @@ void Augmentation::ExpandImage(const AnnotatedDatum& anno_datum,
 		expanded_anno_datum->mutable_annotation_group());
 }
 
-void DrawBBoxOnImage(AnnotatedDatum datum, string filename) {
-	cv::Mat img = DecodeDatumToCVMat(datum.datum(), true);
-	for (int g = 0; g < datum.annotation_group_size(); ++g) {
-		const AnnotationGroup& anno_group = datum.annotation_group(g);
-		NormalizedBBox object_bbox;
-		for (int a = 0; a < anno_group.annotation_size(); ++a) {
-			const Annotation& anno = anno_group.annotation(a);
-			object_bbox = anno.bbox();
-			cv::Point pt1, pt2;
-			pt1.x = (img.cols*object_bbox.xmin());
-			pt1.y = (img.rows*object_bbox.ymin());
-			pt2.x = (img.cols*object_bbox.xmax());
-			pt2.y = (img.rows*object_bbox.ymax());
-			cv::rectangle(img, pt1, pt2, cvScalar(0, 0, 255), 3, 8, 0);
-		}
-	}
-	cv::imwrite(filename, img);
-}
-
 void DrawBBoxImage(cv::Mat img, vector<AnnotationGroup> annotation_group, string filename) {
 	for (int g = 0; g < annotation_group.size(); ++g) {
 		const AnnotationGroup& anno_group = annotation_group[g];
@@ -941,18 +956,28 @@ void DrawBBoxImage(cv::Mat img, vector<AnnotationGroup> annotation_group, string
 	cv::imwrite(filename, img);
 }
 
+void DrawBBoxImageByAnnoGroup(AnnotatedDatum datum, string filename) {
+	cv::Mat img = DecodeDatumToCVMat(datum.datum(), true);
+
+	vector<AnnotationGroup> anno_group_vec;
+	for (int g = 0; g < datum.annotation_group_size(); ++g) {
+		const AnnotationGroup anno_group = datum.annotation_group(g);
+		anno_group_vec.push_back(anno_group);
+	}
+	DrawBBoxImage(img, anno_group_vec, filename);
+}
+
 
 DEFINE_int32(min_dim, 0,
 	"Minimum dimension images are resized to (keep same aspect ratio)");
 DEFINE_int32(max_dim, 0,
 	"Maximum dimension images are resized to (keep same aspect ratio)");
 
-void DataAugmentation(cv::Mat img, string img_file) {
+void DataAugmentation(vector<string> img_files, vector<string> anno_files) {
 	const string& label_map_file = "D:\\Develop\\MobileNet-SSD-windows\\data\\VOC0712\\labelmap_voc.prototxt";
 	const string& param_file = "D:\\Develop\\MobileNet-SSD-windows\\models\\VGGNet\\VOC0712\\SSD_300x300\\train.prototxt";
 	const string& mean_file = FLAGS_mean_file;
 	const string& mean_value = FLAGS_mean_value;
-
 
 	// Initialize the network.
 	Augmentation augment(param_file, mean_file, mean_value);
@@ -966,196 +991,151 @@ void DataAugmentation(cv::Mat img, string img_file) {
 	CHECK(MapNameToLabel(label_map, false, name_to_label))
 		<< "Failed to convert name to label.";
 
-	// Set AnnotatedDatum for augmentation
-	path img_path(img_file);
-	const string labelfile = (img_path.replace_extension(".xml")).string();
-	int height = img.rows;
-	int width = img.cols;
-	AnnotatedDatum anno_datum;
-	ReadXMLToAnnotatedDatum(labelfile, height, width, *name_to_label, &anno_datum);
-	// Read image to datum.
-	int min_dim = std::max<int>(0, FLAGS_min_dim);
-	int max_dim = std::max<int>(0, FLAGS_max_dim);
-	bool status = ReadImageToDatum(img_file, -1, height, width,
-		min_dim, max_dim, true, "jpg", anno_datum.mutable_datum());
+	for (int f = 0; f<img_files.size(); f++) {
+		// Set AnnotatedDatum for augmentation
+		cv::Mat img = cv::imread(img_files[f]);
+		if (img.empty()) {
+			std::cerr << "Failed to open image file." << std::endl;
+			return; //only proceed if sucsessful
+		}
+		int height = img.rows;
+		int width = img.cols;
+		AnnotatedDatum anno_datum;
+		ReadXMLToAnnotatedDatum(anno_files[f], height, width, *name_to_label, &anno_datum);
 
-	CPUTimer batch_timer;
-	batch_timer.Start();
-	double read_time = 0;
-	double trans_time = 0;
-	CPUTimer timer;
+		// Read image to datum.
+		int min_dim = std::max<int>(0, FLAGS_min_dim);
+		int max_dim = std::max<int>(0, FLAGS_max_dim);
+		bool status = ReadImageToDatum(img_files[f], -1, height, width,
+			min_dim, max_dim, true, "jpg", anno_datum.mutable_datum());
 
-	// Store transformed annotation.
-	map<int, vector<AnnotationGroup> > all_anno;
-	int num_bboxes = 0;
-	int item_id = 0;
+		CPUTimer batch_timer;
+		batch_timer.Start();
+		double read_time = 0;
+		double trans_time = 0;
+		CPUTimer timer;
 
-	/*
-	 * Color Distortion and Expand
-	 */
-	timer.Start();
-	read_time += timer.MicroSeconds();
-	timer.Start();
-	AnnotatedDatum distort_datum;
-	//AnnotatedDatum* expand_datum = NULL;
-	AnnotatedDatum* expand_datum = new AnnotatedDatum();
-	if (augment.param_.has_distort_param()) {
-		distort_datum.CopyFrom(anno_datum);
-		augment.DistortImage(anno_datum.datum(), distort_datum.mutable_datum());
-		DrawBBoxOnImage(distort_datum, "distort.png");
-		if (augment.param_.has_expand_param()) {
-			augment.ExpandImage(distort_datum, expand_datum);
-			DrawBBoxOnImage(*expand_datum, "expand.png");
+		// Store transformed annotation.
+		map<int, vector<AnnotationGroup> > all_anno;
+		int num_bboxes = 0;
+		int item_id = 0;
+
+		/*
+		* Color Distortion and Expand
+		*/
+		timer.Start();
+		read_time += timer.MicroSeconds();
+		timer.Start();
+		AnnotatedDatum distort_datum;
+		//AnnotatedDatum* expand_datum = NULL;
+		AnnotatedDatum* expand_datum = new AnnotatedDatum();
+		if (augment.param_.has_distort_param()) {
+			distort_datum.CopyFrom(anno_datum);
+			augment.DistortImage(anno_datum.datum(), distort_datum.mutable_datum());
+			DrawBBoxImageByAnnoGroup(distort_datum, "distort.png");
+			if (augment.param_.has_expand_param()) {
+				augment.ExpandImage(distort_datum, expand_datum);
+				DrawBBoxImageByAnnoGroup(*expand_datum, "expand.png");
+			}
+			else {
+				expand_datum = &distort_datum;
+			}
 		}
 		else {
-			expand_datum = &distort_datum;
+			if (augment.param_.has_expand_param()) {
+				augment.ExpandImage(anno_datum, expand_datum);
+			}
+			else {
+				expand_datum = &anno_datum;
+			}
 		}
-	}
-	else {
-		if (augment.param_.has_expand_param()) {
-			augment.ExpandImage(anno_datum, expand_datum);
-		}
-		else {
-			expand_datum = &anno_datum;
-		}
-	}
 
-	/*
-	 * Batch Sampler (Cropping)
-	 */
-	//AnnotatedDatum* sampled_datum = NULL;
-	AnnotatedDatum sampled_datum;
-	bool has_sampled = false;
-	if (augment.batch_samplers_.size() > 0) {
-		// Generate sampled bboxes from expand_datum.
-		vector<NormalizedBBox> sampled_bboxes;
-		GenerateBatchSamples(*expand_datum, augment.batch_samplers_, &sampled_bboxes);
-		if (sampled_bboxes.size() > 0) {
-			// Randomly pick a sampled bbox and crop the expand_datum.
-			int rand_idx = caffe_rng_rand() % sampled_bboxes.size();
-			//sampled_datum = new AnnotatedDatum();
-			augment.CropImage(*expand_datum,
-				sampled_bboxes[rand_idx],
-				&sampled_datum);
-			has_sampled = true;
+		/*
+		* Batch Sampler (Cropping)
+		*/
+		//AnnotatedDatum* sampled_datum = NULL;
+		AnnotatedDatum sampled_datum;
+		bool has_sampled = false;
+		if (augment.batch_samplers_.size() > 0) {
+			// Generate sampled bboxes from expand_datum.
+			vector<NormalizedBBox> sampled_bboxes;
+			GenerateBatchSamples(*expand_datum, augment.batch_samplers_, &sampled_bboxes);
+			if (sampled_bboxes.size() > 0) {
+				// Randomly pick a sampled bbox and crop the expand_datum.
+				int rand_idx = caffe_rng_rand() % sampled_bboxes.size();
+				//sampled_datum = new AnnotatedDatum();
+				augment.CropImage(*expand_datum,
+					sampled_bboxes[rand_idx],
+					&sampled_datum);
+				has_sampled = true;
+			}
+			else {
+				sampled_datum = *expand_datum;
+			}
 		}
 		else {
 			sampled_datum = *expand_datum;
 		}
-	}
-	else {
-		sampled_datum = *expand_datum;
-	}
-	DrawBBoxOnImage(sampled_datum, "crop.png");
-	//CHECK(sampled_datum != NULL);
+		DrawBBoxImageByAnnoGroup(sampled_datum, "crop.png");
+		//CHECK(sampled_datum != NULL);
 
-	/*
-	* Resize, Mirror, vertical Flip and Noise
-	*/
-	timer.Start();
-	// Apply data transformations (mirror, scale, crop...)
-	vector<AnnotationGroup> transformed_anno_vec;
-	Blob<float> transformed_data_;
-	if (true) {
-		AnnotatedDataParameter anno_data_param = augment.layer_param_.annotated_data_param();
-		//if (anno_data_param.has_anno_type()) {
+		/*
+		* Resize, Mirror, vertical Flip and Noise
+		*/
+		timer.Start();
+		// Apply data transformations (mirror, scale, crop...)
+		vector<AnnotationGroup> transformed_anno_vec;
+		Blob<float> transformed_data_;
 		if (true) {
-			// Make sure all data have same annotation type.
-			/*CHECK(sampled_datum->has_type()) << "Some datum misses AnnotationType.";
-			if (augment.layer_param_. anno_data_param.has_anno_type()) {
+			AnnotatedDataParameter anno_data_param = augment.layer_param_.annotated_data_param();
+			//if (anno_data_param.has_anno_type()) {
+			if (true) {
+				// Make sure all data have same annotation type.
+				/*CHECK(sampled_datum->has_type()) << "Some datum misses AnnotationType.";
+				if (augment.layer_param_. anno_data_param.has_anno_type()) {
 				sampled_datum->set_type(anno_type_);
-			}
-			else {
+				}
+				else {
 				CHECK_EQ(anno_type_, sampled_datum->type()) <<
-					"Different AnnotationType.";
-			} */
-			// Transform datum and annotation_group at the same time
-			transformed_anno_vec.clear();
-			augment.Transform(sampled_datum,
-				&(transformed_data_),
-				&transformed_anno_vec);
-			//if (anno_type_ == AnnotatedDatum_AnnotationType_BBOX) {
+				"Different AnnotationType.";
+				} */
+				// Transform datum and annotation_group at the same time
+				transformed_anno_vec.clear();
+				augment.Transform(sampled_datum,
+					&(transformed_data_),
+					&transformed_anno_vec);
+				//if (anno_type_ == AnnotatedDatum_AnnotationType_BBOX) {
 				// Count the number of bboxes.
 				for (int g = 0; g < transformed_anno_vec.size(); ++g) {
 					num_bboxes += transformed_anno_vec[g].annotation_size();
 				}
-			//}
-			//else {
-			//	LOG(FATAL) << "Unknown annotation type.";
-			//}
-			all_anno[item_id] = transformed_anno_vec;
+				//}
+				//else {
+				//	LOG(FATAL) << "Unknown annotation type.";
+				//}
+				all_anno[item_id] = transformed_anno_vec;
+			}
+			else {
+				augment.Transform(sampled_datum.datum(),
+					&(transformed_data_));
+				// Otherwise, store the label from datum.
+				CHECK(sampled_datum.datum().has_label()) << "Cannot find any label.";
+				//top_label[item_id] = sampled_datum->datum().label();
+			}
 		}
 		else {
 			augment.Transform(sampled_datum.datum(),
 				&(transformed_data_));
-			// Otherwise, store the label from datum.
-			CHECK(sampled_datum.datum().has_label()) << "Cannot find any label.";
-			//top_label[item_id] = sampled_datum->datum().label();
 		}
-	}
-	else {
-		augment.Transform(sampled_datum.datum(),
-			&(transformed_data_));
-	}
-	cv::Mat result_image = cv::imread("resized.png");
-	DrawBBoxImage(result_image, transformed_anno_vec, "resized.png");
-	for (int i = 0; i < transformed_anno_vec.size(); i++) {
-		for (int j = 0; j < transformed_anno_vec[i].annotation_size() ; j++) {
-			;
+		cv::Mat result_image = cv::imread("resized.png");
+		DrawBBoxImage(result_image, transformed_anno_vec, "resized.png");
+		for (int i = 0; i < transformed_anno_vec.size(); i++) {
+			for (int j = 0; j < transformed_anno_vec[i].annotation_size(); j++) {
+				;
+			}
 		}
 	}
 	
+	return;
 }
 
-
-int main(int argc, char** argv) {
-  ::google::InitGoogleLogging(argv[0]);
-
-#ifndef GFLAGS_GFLAGS_H_
-  namespace gflags = google;
-#endif
-
-  gflags::SetUsageMessage("Do augmentation using SSD mode.\n"
-        "Usage:\n"
-        "    ssd_augmentation [FLAGS] list_file\n");
-  gflags::ParseCommandLineFlags(&argc, &argv, true);
-
-  if (argc < 2) {
-    gflags::ShowUsageWithFlagsRestrict(argv[0], "examples/ssd/ssd_augmentation");
-    return 1;
-  }
-
-
-  // Process image one by one.
-  string filename = argv[3];
-  std::ifstream infile(filename);
-  // http://hwada.hatenablog.com/entry/20110611/1307781684
-  path fullpath(filename);
-  path rootdir = fullpath.root_directory();
-  //const string indir = basename(argv[3]);
-  const string indir = rootdir.string();
-
-  std::string img_file;
-  string line;
-  vector<std::string> fn;
-  while (std::getline(infile, line)) {
-	  fn.push_back(line);
-  }
-  //vector<cv::Mat> data;
-  for (size_t k = 0; k < fn.size(); ++k)
-  {
-	  img_file = fn[k];
-	  cv::Mat img = cv::imread(img_file);
-	  if (img.empty()) continue; //only proceed if sucsessful
-
-	  DataAugmentation(img, img_file);
-
-	  //data.push_back(img);
-  }
-  return 0;
-}
-#else
-int main(int argc, char** argv) {
-  LOG(FATAL) << "This example requires OpenCV; compile with USE_OPENCV.";
-}
-#endif  // USE_OPENCV
