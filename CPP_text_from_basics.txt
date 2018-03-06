@@ -1,0 +1,34 @@
+5.2 関数へのデータの渡し方
+5.2.1 パラメータの型の決定方針
+1) int
+　　　// xは引数のコピー
+　　　void f1(int x)     { cout << ++x   << endl; }
+　　　int x=100
+　　　f(x)=101
+　　　x=100
+　　　関数の値はコピーされるので、関数によって元の値は変更されない。
+2) const int
+　　　// xは引数のコピー(変更不可)
+　　　void f1(int x)     { cout << x + 1  << endl; }
+　　　int x=100
+　　　f(x)=101
+　　　x=100
+　　　パラメータも変更できないようにする場合。
+3) int&
+　　　関数の値をコピーせず、元の値を変更する場合。
+4) const int&
+　　　パラメータを変更せず、かつ引数が大きな元のオブジェクトを変更する場合。
+5) int*
+　　　引数が配列の場合でコピーせず、元の値を変更する場合。
+6) const int*
+
+
+
+
+int param = 0x00000800u;
+param |= 0x00000200u;
+std::cout << "bit: " << param << std::endl;
+std::cout << "hex: " << std::hex << param << std::endl;
+std::stringstream ss;
+ss << std::hex << param;
+std::cout << ss.str() << std::endl;
