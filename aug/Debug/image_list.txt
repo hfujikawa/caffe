@@ -1,2 +1,0 @@
-D:\Develop\MobileNet-SSD-windows\examples\images\000013.jpg
-D:\Develop\MobileNet-SSD-windows\examples\images\000001.jpg
