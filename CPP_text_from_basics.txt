@@ -23,6 +23,86 @@
 6) const int*
 
 
+6.1.3 要素の追加と削除
+#include <complex>
+using cplx = complex<double>;
+vector<cplx> v;
+cplx z(3., 4.);   //オブジェクトの構築
+v.push_back(z);   //要素の追加（コピー）
+v.emplace_back(1., 2.);   //オブジェクトの構築と追加
+
+vector<int> v1;
+for (int i = 0; i < n; ++i) {
+  cout << v1.capacity() << ", ";
+  v1.push_back(i);
+}
+cout << endl;
+
+vector<int> v{ 2, 3, 5, 7 };
+v.pop_back();   //末尾の削除
+v.erase(v.begin() + 1);   //2番目の要素の削除
+
+7.1 std::string
+C++には２種類の文字列std::stringとＣスタイル文字列がある
+
+7.1.1 stringオブジェクトの構築
+string str1 = "Hello, ";
+//string str1("Hello");
+
+7.1.2 stringのメソッド
+string str1 = "Hello, ";
+string str2 = "World!";
+//5文字目
+cout << str1[4] << endl;
+//追記
+str1 += str2;
+cout << str1 << endl;
+//比較
+cout << (str1 == str2) << endl;   //出力値：-1
+cout << str1.compare("Hello, Z!") << endl;   //出力値：0
+//検索
+cout << str1.find("World") << endl;   //出力値7
+if (str1.find("world") == string::npos) cout << "NOT found\n";  //出力値：NOT found
+//検索（後ろから）
+cout << str1.rfind("o") << endl;   //出力値：8
+//置換（7文字目からの5文字を置き換える）
+str1.replace(7, 5, "Nippon");
+//部分文字列（7文字目からの6文字を取り出す）
+cout << str1.substr(7, 6) << endl;   //出力値：Nippon
+
+7.1.3 Ｃスタイル文字列
+char cstr[] = "hello";
+cstr[0] = 'H';
+size_t size = end(cstr) - begin(cstr);
+//size_t = sizeof(cstr) / sizeof(char);
+cout << size << endl;
+cout << strlen(cstr) << endl;
+配列の要素数は文字数＋１
+hello\0
+
+void report(const char* csstr) {
+}
+
+int main() {
+  char cstr[] = "hello";
+  report(cstr);
+}
+
+// https://stackoverflow.com/questions/347949/how-to-convert-a-stdstring-to-const-char-or-char
+char* writable = new char[str.size() + 1];
+std::copy(str.begin(), str.end(), writable);
+writable[str.size()] = '\0'; // don't forget the terminating 0
+read_png_file(writable);
+delete[] writable;
+
+
+7.1.4 マニピュレータによる文字列の整形
+<iomanip>
+int n = 123;
+cout << seprecision(10);
+
+double x = 1. / 7.;
+cout << size << endl;
 
 
 int param = 0x00000800u;

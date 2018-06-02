@@ -1,0 +1,29 @@
+https://qiita.com/nia_tn1012/items/77c3c1b006f7c69d30ac
+C++プロジェクトでNuGetを使ってみようよ！（Vol. 1：パッケージ導入編）
+
+
+LabelMap label_map;
+CHECK(ReadProtoFromTextFile(label_map_file, &label_map))
+    << "Failed to read label map file.";
+CHECK(MapNameToLabel(label_map, check_label, &name_to_label))
+        << "Failed to convert name to label.";
+
+bool MapNameToLabel(const LabelMap& map, const bool strict_check,
+    std::map<string, int>* name_to_label) {
+  // cleanup
+  name_to_label->clear();
+
+  for (int i = 0; i < map.item_size(); ++i) {
+    const string& name = map.item(i).name();
+
+
+for (int line_id = 0; line_id < lines.size(); ++line_id) {
+
+labelname = root_folder + boost::get<std::string>(lines[line_id].second);
+status = ReadRichImageToAnnotatedDatum(filename, labelname, resize_height,
+    resize_width, min_dim, max_dim, is_color, enc, type, label_type,
+    name_to_label, &anno_datum);
+
+    int ori_height, ori_width;
+    GetImageSize(filename, &ori_height, &ori_width);
+    ReadXMLToAnnotatedDatum(labelfile, ori_height, ori_width, name_to_label, anno_datum);

@@ -13,3 +13,13 @@ pspnet101_VOC2012.caffemodel
 
 <Caffe-Dilation>
 vgg_conv.caffemodel
+
+<RoadDamageDetector>
+vgg16v2_model.npz
+
+<ILSVRC2012>
+https://qiita.com/htsst/items/2d69428cc538b5fa7497
+wget http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_img_train.tar
+
+
+https://kyamagu.github.io/dl-workshop-2016/4-hunnyhunt

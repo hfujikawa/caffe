@@ -1,5 +1,5 @@
 windows10 ubuntu on windows i7-6700HQ 2.6GHz
-i2m@MSI:~/caffe-intel$ build/tools/caffe time -model examples/mnist/lenet_train_test.prototxt -iterations 10
+i2m@MSI:~/caffe-intel$ ./build/tools/caffe time -model examples/mnist/lenet_train_test.prototxt -iterations 10
 I1021 14:24:01.045907 18439 caffe.cpp:523] Use CPU.
 I1021 14:24:01.056241 18439 cpu_info.cpp:453] Processor speed [MHz]: 2600
 I1021 14:24:01.056335 18439 cpu_info.cpp:456] Total number of sockets: 1
@@ -283,3 +283,73 @@ I1021 14:24:01.429180 18439 caffe.cpp:619] Average Backward pass: 7.4753 ms.
 I1021 14:24:01.429636 18439 caffe.cpp:621] Average Forward-Backward: 15.1 ms.
 I1021 14:24:01.429877 18439 caffe.cpp:624] Total Time: 151 ms.
 I1021 14:24:01.430343 18439 caffe.cpp:625] *** Benchmark ends ***
+
+
+
+
+2018/01/14
+I0114 13:53:11.913014  1727 caffe.cpp:539] Use CPU.
+I0114 13:53:11.923481  1727 cpu_info.cpp:453] Processor speed [MHz]: 2600
+I0114 13:53:11.923557  1727 cpu_info.cpp:456] Total number of sockets: 1
+I0114 13:53:11.923882  1727 cpu_info.cpp:459] Total number of CPU cores: 4
+I0114 13:53:11.924338  1727 cpu_info.cpp:462] Total number of processors: 8
+I0114 13:53:11.924590  1727 cpu_info.cpp:465] GPU is used: no
+I0114 13:53:11.925083  1727 cpu_info.cpp:468] OpenMP environmental variables are specified: no
+I0114 13:53:11.925338  1727 cpu_info.cpp:471] OpenMP thread bind allowed: yes
+I0114 13:53:11.928969  1727 cpu_info.cpp:474] Number of OpenMP threads: 4
+
+I0114 13:53:12.038170  1727 net.cpp:521] Network initialization done.
+I0114 13:53:12.038691  1727 caffe.cpp:550] Performing Forward
+I0114 13:53:12.056671  1727 caffe.cpp:555] Initial loss: 2.34674
+I0114 13:53:12.056881  1727 caffe.cpp:557] Performing Backward
+I0114 13:53:12.167816  1727 caffe.cpp:586] *** Benchmark begins ***
+I0114 13:53:12.168032  1727 caffe.cpp:587] Testing for 10 iterations.
+I0114 13:53:12.194617  1727 caffe.cpp:616] Iteration: 1 forward-backward time: 26 ms.
+I0114 13:53:12.221010  1727 caffe.cpp:616] Iteration: 2 forward-backward time: 26 ms.
+I0114 13:53:12.247198  1727 caffe.cpp:616] Iteration: 3 forward-backward time: 25 ms.
+I0114 13:53:12.267998  1727 caffe.cpp:616] Iteration: 4 forward-backward time: 20 ms.
+I0114 13:53:12.294538  1727 caffe.cpp:616] Iteration: 5 forward-backward time: 26 ms.
+I0114 13:53:12.315331  1727 caffe.cpp:616] Iteration: 6 forward-backward time: 20 ms.
+I0114 13:53:12.341945  1727 caffe.cpp:616] Iteration: 7 forward-backward time: 26 ms.
+I0114 13:53:12.368086  1727 caffe.cpp:616] Iteration: 8 forward-backward time: 25 ms.
+I0114 13:53:12.394457  1727 caffe.cpp:616] Iteration: 9 forward-backward time: 26 ms.
+I0114 13:53:12.420810  1727 caffe.cpp:616] Iteration: 10 forward-backward time: 26 ms.
+I0114 13:53:12.421032  1727 caffe.cpp:623] Average time per layer:
+I0114 13:53:12.421375  1727 caffe.cpp:626]      mnist   forward: 0.2686 ms.
+I0114 13:53:12.421845  1727 caffe.cpp:630]      mnist   backward: 0.0011 ms.
+I0114 13:53:12.422127  1727 caffe.cpp:626]      conv1   forward: 0.9829 ms.
+I0114 13:53:12.422580  1727 caffe.cpp:630]      conv1   backward: 7.9566 ms.
+I0114 13:53:12.422837  1727 caffe.cpp:626]      pool1   forward: 3.4511 ms.
+I0114 13:53:12.423251  1727 caffe.cpp:630]      pool1   backward: 0.5981 ms.
+I0114 13:53:12.423506  1727 caffe.cpp:626]      conv2   forward: 2.2661 ms.
+I0114 13:53:12.423923  1727 caffe.cpp:630]      conv2   backward: 6.9855 ms.
+I0114 13:53:12.424182  1727 caffe.cpp:626]      pool2   forward: 1.094 ms.
+I0114 13:53:12.424595  1727 caffe.cpp:630]      pool2   backward: 0.1848 ms.
+I0114 13:53:12.424849  1727 caffe.cpp:626]        ip1   forward: 0.4586 ms.
+I0114 13:53:12.425266  1727 caffe.cpp:630]        ip1   backward: 0.6589 ms.
+I0114 13:53:12.425519  1727 caffe.cpp:626]      relu1   forward: 0.0084 ms.
+I0114 13:53:12.425961  1727 caffe.cpp:630]      relu1   backward: 0.0067 ms.
+I0114 13:53:12.426213  1727 caffe.cpp:626]        ip2   forward: 0.0183 ms.
+I0114 13:53:12.426656  1727 caffe.cpp:630]        ip2   backward: 0.0465 ms.
+I0114 13:53:12.426923  1727 caffe.cpp:626]       loss   forward: 0.0512 ms.
+I0114 13:53:12.427410  1727 caffe.cpp:630]       loss   backward: 0.0022 ms.
+I0114 13:53:12.427670  1727 caffe.cpp:636] Average Forward pass: 8.6112 ms.
+I0114 13:53:12.428081  1727 caffe.cpp:639] Average Backward pass: 16.4503 ms.
+I0114 13:53:12.428354  1727 caffe.cpp:641] Average Forward-Backward: 25.9 ms.
+I0114 13:53:12.428771  1727 caffe.cpp:644] Total Time: 259 ms.
+I0114 13:53:12.429033  1727 caffe.cpp:645] *** Benchmark ends ***
+
+
+
+caffe-ssd ub16 GTX950M CUDA8.0+cuDNN5.1
+I0127 10:27:43.932034  6442 caffe.cpp:412] Average Forward pass: 1.43304 ms.
+I0127 10:27:43.932039  6442 caffe.cpp:414] Average Backward pass: 1.30175 ms.
+I0127 10:27:43.932047  6442 caffe.cpp:416] Average Forward-Backward: 2.85318 ms.
+I0127 10:27:43.932054  6442 caffe.cpp:418] Total Time: 28.5318 ms.
+I0127 10:27:43.932061  6442 caffe.cpp:419] *** Benchmark ends ***
+CPU Only
+I0127 10:28:24.296214  6477 caffe.cpp:412] Average Forward pass: 61.5097 ms.
+I0127 10:28:24.296218  6477 caffe.cpp:414] Average Backward pass: 55.338 ms.
+I0127 10:28:24.296222  6477 caffe.cpp:416] Average Forward-Backward: 116.9 ms.
+I0127 10:28:24.296226  6477 caffe.cpp:418] Total Time: 1169 ms.
+I0127 10:28:24.296231  6477 caffe.cpp:419] *** Benchmark ends ***

@@ -1,0 +1,12 @@
+<DIGITS>
+https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md
+Getting Started
+
+https://mementoo.info/archives/2351
+MNISTをDIGITS 5のCPUのみで試す(GPUなし)
+
+https://soralab.space-ichikawa.com/2017/01/digits5-segmentation/
+GitHub版DIGITSでセグメンテーションモデルを作成してみた
+
+https://github.com/NVIDIA/DIGITS/tree/master/examples/semantic-segmentation
+Using DIGITS to train a Semantic Segmentation neural network

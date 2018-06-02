@@ -163,6 +163,11 @@ $ git remote add origin /z/Git repo/project1
 $ git push origin master
 cf. sudo apt-get install cifs-utils
 
+<Git pull>
+git pullを強制し、リモートでローカルを上書きする方法
+http://www-creators.com/archives/1097
+git fetch origin master
+
 <Github>
 ローカルでgitを使用した後、gitHubに登録する方法
 https://qiita.com/koshihikari/items/dcf126fa9c0de2b6fa7e

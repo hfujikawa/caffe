@@ -1,0 +1,32 @@
+
+
+<OpenCV Install>
+Install OpenCV 3 on Windows
+http://www.learnopencv.com/install-opencv3-on-windows/
+
+
+<OpenCV-Python>
+Install OpenCV 3.4 in Python 3.6 / 2.7
+https://www.scivision.co/install-opencv-python-windows/
+
+
+
+// https://www.buildinsider.net/small/opencv/005
+std::cout << cv::getBuildInformation() << std::endl;
+
+
+
+<libpng>
+https://gist.github.com/niw/5963798
+How to read and write PNG file using libpng. Covers trivial method calls like png_set_filler.
+
+https://www.mm2d.net/main/prog/c/image_io-15.html
+PNG画像の入出力
+
+
+<TextBook for coding YAML>
+OpenCV3 プログラミングブック
+https://books.google.co.jp/books?id=rgfjCgAAQBAJ&pg=PA79&lpg=PA79&dq=yaml+opencv&source=bl&ots=-GVj9v6PHU&sig=juM4g7o5w2c-5ZWzCtpGL7hSKhQ&hl=ja&sa=X&ved=0ahUKEwjGhKKf-8rZAhWD2LwKHWEsA4I4ChDoAQhfMAc#v=onepage&q=yaml%20opencv&f=false
+
+Mastering OpenCV with Practical Computer Vision Projects
+https://books.google.co.jp/books?id=UjWoIFHcr58C&pg=PT275&lpg=PT275&dq=opencv+json&source=bl&ots=Sad8HAlp3t&sig=RlsmJt7vKmoEgGYLO6yaV0gCYNU&hl=ja&sa=X&ved=0ahUKEwjjj-akyM3ZAhVMT7wKHR7uCmA4FBDoAQhPMAo#v=onepage&q=opencv%20json&f=false

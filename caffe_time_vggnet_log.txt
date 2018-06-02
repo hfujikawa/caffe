@@ -2986,3 +2986,23 @@ I0125 21:57:39.538200  7020 caffe.cpp:414] Average Backward pass: 141.191 ms.
 I0125 21:57:39.538200  7020 caffe.cpp:416] Average Forward-Backward: 283.997 ms.
 I0125 21:57:39.538200  7020 caffe.cpp:418] Total Time: 2839.97 ms.
 I0125 21:57:39.538200  7020 caffe.cpp:419] *** Benchmark ends ***
+vs2015+CUDA8.0+cuDNN5.1
+I0127 12:19:05.751478  5376 caffe.cpp:412] Average Forward pass: 111.532 ms.
+I0127 12:19:05.751478  5376 caffe.cpp:414] Average Backward pass: 127.722 ms.
+I0127 12:19:05.751478  5376 caffe.cpp:416] Average Forward-Backward: 240.411 ms.
+I0127 12:19:05.751478  5376 caffe.cpp:418] Total Time: 2404.11 ms.
+I0127 12:19:05.751478  5376 caffe.cpp:419] *** Benchmark ends ***
+
+
+caffe-ssd ub16 GTX950M CUDA8.0+cuDNN5.1
+I0127 10:20:18.491663  5631 caffe.cpp:412] Average Forward pass: 78.0387 ms.
+I0127 10:20:18.491668  5631 caffe.cpp:414] Average Backward pass: 173.784 ms.
+I0127 10:20:18.491677  5631 caffe.cpp:416] Average Forward-Backward: 252.004 ms.
+I0127 10:20:18.491683  5631 caffe.cpp:418] Total Time: 2520.04 ms.
+I0127 10:20:18.491688  5631 caffe.cpp:419] *** Benchmark ends ***
+CPU Only
+I0127 10:25:01.243844  6221 caffe.cpp:412] Average Forward pass: 5373.39 ms.
+I0127 10:25:01.243849  6221 caffe.cpp:414] Average Backward pass: 2877.93 ms.
+I0127 10:25:01.243854  6221 caffe.cpp:416] Average Forward-Backward: 8251.5 ms.
+I0127 10:25:01.243860  6221 caffe.cpp:418] Total Time: 82515 ms.
+I0127 10:25:01.243866  6221 caffe.cpp:419] *** Benchmark ends ***

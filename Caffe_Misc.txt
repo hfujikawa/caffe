@@ -13,6 +13,9 @@ Training and deploying deep learning networks with Caffe
 https://deepanalytics.jp/contents/cookpad_dtc_tutorial
 【(1)料理領域検出部門】「人工知能技術戦略会議主催 第1回AIチャレンジコンテスト」評価関数コード
 
+http://blog.brainpad.co.jp/entry/2017/02/24/121500
+強化学習入門 ～これから強化学習を学びたい人のための基礎知識～
+
 
 <Caffe-SSD>
 
