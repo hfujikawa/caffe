@@ -1,0 +1,2 @@
+https://www.jstage.jst.go.jp/article/pscjspe/2016A/0/2016A_469/_pdf
+深層学習によるMMS画像からの柱状物体の分類精度評価

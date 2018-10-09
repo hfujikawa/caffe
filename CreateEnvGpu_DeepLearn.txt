@@ -1,3 +1,11 @@
+<RoadDamageDetector>
+https://qiita.com/IshitaTakeshi/items/915de731d8081e711ae5
+https://github.com/sekilab/RoadDamageDetector
+https://github.com/IshitaTakeshi/RoadDamageDetector
+
+<Azure>
+https://qiita.com/arai-guma/items/d84a7b72893d6c27ed60
+
 https://qiita.com/wazakkyd/items/ab79920b22b24b385487
 CUDA 7.5 をWindows10にインストールし、Sampleコードを実行するまで
 

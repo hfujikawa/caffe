@@ -1,3 +1,8 @@
+https://www.kdnuggets.com/2018/02/building-toy-detector-tensorflow-object-detection-api.html
+Deep_Learning_with_Keras_chp3.pdf
+tf_keras_book_append.pdf
+tf_keras_book_chp4.pdf
+
 <Semantic Segmentation References>
 semanticsegmentation-170216041645.pdf
 onkyo_kansai_slide.pdf
