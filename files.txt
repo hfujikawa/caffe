@@ -3,6 +3,10 @@ Deep_Learning_with_Keras_chp3.pdf
 tf_keras_book_append.pdf
 tf_keras_book_chp4.pdf
 
+<OpenCV Semantic Segmentation>
+tensorflow_inception_graph.pb
+Enet-model-best.net
+
 <Semantic Segmentation References>
 semanticsegmentation-170216041645.pdf
 onkyo_kansai_slide.pdf
