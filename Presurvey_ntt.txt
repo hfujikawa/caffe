@@ -1,2 +1,53 @@
+
+<Annotation Tool>
+https://lear.inrialpes.fr/people/klaeser/software_image_annotation
+Image annotation tool with image masks
+
+https://github.com/cvondrick/vatic
+VATIC - Video Annotation Tool from Irvine, California
+
+https://github.com/opencv/cvat
+Computer Vision Annotation Tool (CVAT)
+
+https://www.ikw.uni-osnabrueck.de/index.php?id=2218&L=1
+iSeg: interactive annotation and Segmentation tool
+
+https://github.com/Suraj520/CognitiveAnnotationTool
+Cognitive Annotation Tool
+
+https://www.softbanktech.jp/service/list/ms-azure_blog/ms-azure_blog_0086/
+画像のデータセット作成が楽になる！Microsoft のアノテーションツール、VoTT のご紹介
+
+
+<OpenCV Semantic Segmentation>
+https://github.com/opencv/opencv_extra.git
+
+https://s3-us-west-2.amazonaws.com/static.pyimagesearch.com/opencv-semantic-segmentation/opencv-semantic-segmentation.zip
+
+
+<TF物体検出API etc>
+https://qiita.com/kappanda/items/697ba3c6625774d3414c
+Tensorflowのobject detection APIのチュートリアルを試す（windows）
+
+https://karaage.hatenadiary.jp/entry/2018/06/04/070000
+ディープラーニング（SSD）を使ってモザイクをかける方法
+https://github.com/karaage0703/ssd_keras
+Port of Single Shot MultiBox Detector to Keras
+
+
+<書籍>
+詳解 ディープラーニング　TensorFlow・Kerasによる時系列データ処理
+発売日：  	2017年05月29日
+著者／編集：  	巣籠 悠輔
+出版社：  	マイナビ出版
+発行形態：  	単行本
+ページ数：  	328p
+ISBNコード：  	9784839962517
+
+https://book.mynavi.jp/manatee/series/detail/id=65670
+機械学習で遊ぼう！APIサービスやTensorFlowを使ったサンプルレシピ集
+
+
+<参考文献>
 https://www.jstage.jst.go.jp/article/pscjspe/2016A/0/2016A_469/_pdf
 深層学習によるMMS画像からの柱状物体の分類精度評価
