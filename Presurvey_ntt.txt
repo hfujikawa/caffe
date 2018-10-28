@@ -24,6 +24,21 @@ https://github.com/opencv/opencv_extra.git
 
 https://s3-us-west-2.amazonaws.com/static.pyimagesearch.com/opencv-semantic-segmentation/opencv-semantic-segmentation.zip
 
+https://news.mynavi.jp/article/cv_future-36/
+CRFを用いたSemantic Image Segmentation
+
+http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/18/image-segmentation-with-tensorflow-using-cnns-and-conditional-random-fields/
+Image Segmentation with Tensorflow using CNNs and Conditional Random Fields
+
+http://labs.eecs.tottori-u.ac.jp/sd/Member/oyamada/OpenCV/html/py_tutorials/py_imgproc/py_grabcut/py_grabcut.html#grabcut
+GrabCutを使った対話的前景領域抽出
+
+https://www.pyimagesearch.com/2018/09/03/semantic-segmentation-with-opencv-and-deep-learning/
+Semantic segmentation with OpenCV and deep learning
+
+https://towardsdatascience.com/background-removal-with-deep-learning-c4f2104b3157
+Background removal with deep learning
+
 
 <TF物体検出API etc>
 https://qiita.com/kappanda/items/697ba3c6625774d3414c
