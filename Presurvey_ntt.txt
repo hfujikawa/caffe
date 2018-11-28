@@ -15,8 +15,14 @@ iSeg: interactive annotation and Segmentation tool
 https://github.com/Suraj520/CognitiveAnnotationTool
 Cognitive Annotation Tool
 
+https://githubja.com/wkentaro/labelme
+labelme：Pythonによる画像ポリゴンアノテーション
+
 https://www.softbanktech.jp/service/list/ms-azure_blog/ms-azure_blog_0086/
 画像のデータセット作成が楽になる！Microsoft のアノテーションツール、VoTT のご紹介
+
+https://rectlabel.com/
+An image annotation tool to label images for bounding box object detection and segmentation.
 
 
 <OpenCV Semantic Segmentation>
@@ -36,8 +42,14 @@ GrabCutを使った対話的前景領域抽出
 https://www.pyimagesearch.com/2018/09/03/semantic-segmentation-with-opencv-and-deep-learning/
 Semantic segmentation with OpenCV and deep learning
 
+https://github.com/lucasb-eyer/pydensecrf
+Python wrapper to Philipp Krähenbühl's dense (fully connected) CRFs with gaussian edge potentials.
+
 https://towardsdatascience.com/background-removal-with-deep-learning-c4f2104b3157
 Background removal with deep learning
+
+http://robonchu.hatenablog.com/entry/2018/05/07/181913
+領域処理のお勉強
 
 
 <TF物体検出API etc>
@@ -48,6 +60,22 @@ https://karaage.hatenadiary.jp/entry/2018/06/04/070000
 ディープラーニング（SSD）を使ってモザイクをかける方法
 https://github.com/karaage0703/ssd_keras
 Port of Single Shot MultiBox Detector to Keras
+
+<Keras Tips>
+https://qiita.com/daizutabi/items/bf4e965b64b12ef1fea0
+GPU版TensorFlowをワンライナーでインストールする方法 (Windows 10)
+
+http://pynote.hatenablog.com/entry/keras-file-format
+Keras のファイルの形式について
+
+https://keras.io/ja/getting-started/faq/#kerashdf5
+Keras FAQ
+
+
+<Azure RDP>
+https://docs.microsoft.com/ja-jp/azure/virtual-machines/linux/use-remote-desktop
+
+https://buildazure.com/2018/02/28/how-to-setup-an-ubuntu-linux-vm-in-azure-with-remote-desktop-rdp-access/
 
 
 <書籍>
