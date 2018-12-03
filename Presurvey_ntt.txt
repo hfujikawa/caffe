@@ -77,6 +77,25 @@ https://docs.microsoft.com/ja-jp/azure/virtual-machines/linux/use-remote-desktop
 
 https://buildazure.com/2018/02/28/how-to-setup-an-ubuntu-linux-vm-in-azure-with-remote-desktop-rdp-access/
 
+<SCP>
+https://www.j-oosk.com/teraterm/file-transfer/
+
+<Docker>
+https://licensecounter.jp/devops-hub/blog/nvidia-1/
+GPUを利用するためのDocker プラグイン「NVIDIA Docker」とは？導入手順は？(前編)
+
+https://qiita.com/legokichi/items/7bf3862569cfca122d73
+nvidia-docker でポータブルな機械学習の作業環境を作る
+
+https://blog.sicara.com/tensorflow-gpu-opencv-jupyter-docker-10705b6cd1d
+Set up TensorFlow with Docker + GPU in Minutes
+
+https://blog.sky-net.pw/article/103
+nvidia-dockerで特定のバージョンが動作しない
+
+https://tech.mokelab.com/infra/docker/mount_local.html
+Dockerで、ホスト側のフォルダをコンテナにマウントする
+
 
 <書籍>
 詳解 ディープラーニング　TensorFlow・Kerasによる時系列データ処理
