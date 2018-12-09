@@ -81,6 +81,12 @@ https://buildazure.com/2018/02/28/how-to-setup-an-ubuntu-linux-vm-in-azure-with-
 https://www.j-oosk.com/teraterm/file-transfer/
 
 <Docker>
+https://loner.jp/dockerfile-makes-dockerimage#ARG
+Dockerfileでカスタマイズしたイメージを作成
+
+https://qiita.com/soushiy/items/0945bcbc7ecce4822985
+Dockerfileを極めて、Dockerマスターになろう！
+
 https://licensecounter.jp/devops-hub/blog/nvidia-1/
 GPUを利用するためのDocker プラグイン「NVIDIA Docker」とは？導入手順は？(前編)
 
