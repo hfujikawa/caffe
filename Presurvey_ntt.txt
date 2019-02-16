@@ -1,3 +1,8 @@
+<Pole Detection>
+https://www.spiedigitallibrary.org/conference-proceedings-of-spie/10793/107930M/Electric-pole-detection-using-deep-network-based-object-detector/10.1117/12.2323773.short?SSO=1
+
+https://www.mdpi.com/2072-4292/10/5/661
+
 
 <Annotation Tool>
 https://lear.inrialpes.fr/people/klaeser/software_image_annotation
@@ -70,6 +75,11 @@ Keras のファイルの形式について
 
 https://keras.io/ja/getting-started/faq/#kerashdf5
 Keras FAQ
+
+
+<TF GPU>
+https://medium.com/@cjanze/how-to-install-tensorflow-with-gpu-support-on-ubuntu-18-04-lts-with-cuda-10-nvidia-gpu-312a693744b5
+How to install TensorFlow with GPU support on Ubuntu 18.04 LTS + CUDA 10
 
 
 <Azure RDP>
