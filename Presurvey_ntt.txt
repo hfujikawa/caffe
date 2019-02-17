@@ -3,6 +3,7 @@ https://www.spiedigitallibrary.org/conference-proceedings-of-spie/10793/107930M/
 
 https://www.mdpi.com/2072-4292/10/5/661
 
+https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/II-3-W5/57/2015/isprsannals-II-3-W5-57-2015.pdf
 
 <Annotation Tool>
 https://lear.inrialpes.fr/people/klaeser/software_image_annotation

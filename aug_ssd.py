@@ -10,6 +10,7 @@ import random
 import six
 import cv2
 from utils_trans import *
+import matplotlib.pyplot as plt
 
 def random_distort(
         img,
@@ -299,6 +300,18 @@ def resize_with_random_interpolation(img, size, return_param=False):
     else:
         return img
 
+def show_img(img_dup, bbox, flag):
+#    img_dup = img.copy()
+    img_chw = img_dup.astype(np.uint8)
+    if flag:
+        img_hwc = np.transpose(img_chw, (1, 2, 0))
+    else:
+        img_hwc = img_dup
+    for box in bbox:
+        xmin, ymin, xmax, ymax = box
+        cv2.rectangle(img_hwc, (xmin, ymin), (xmax, ymax), (0, 255, 0), 2)
+    plt.imshow(img_hwc)
+    plt.show()
 
 m_size = 300
 m_mean = np.array([100,110,120])
@@ -311,12 +324,15 @@ m_mean = np.array([100,110,120])
 # 5. Random horizontal flipping
 
 #img, bbox, label = in_data
-img = cv2.imread('D:\\Develop\\data\\VOCdevkit\\VOC2007\\JPEGImages\\000013.jpg')
-bbox = np.array([[10, 10, 20, 40], [150, 150, 200, 200]], dtype=np.float32)
+cv_img = cv2.imread('D:\\Develop\\data\\VOCdevkit\\VOC2007\\JPEGImages\\000013.jpg')
+#bbox = np.array([[10, 10, 20, 40], [150, 150, 200, 200]], dtype=np.float32)
+bbox = np.array([[299, 160, 446, 252]], dtype=np.float32)
 label = np.array([0,1])
+show_img(cv_img, bbox, False)
 
 # 1. Color augmentation
-img = random_distort(img)
+img = random_distort(cv_img)
+show_img(img, bbox, True)
 
 # 2. Random expansion
 if np.random.randint(2):
@@ -324,6 +340,7 @@ if np.random.randint(2):
         img, fill=m_mean, return_param=True)
     bbox = translate_bbox(
         bbox, y_offset=param['y_offset'], x_offset=param['x_offset'])
+#show_img(img, bbox, True)
 
 # 3. Random cropping
 img, param = random_crop_with_bbox_constraints(
@@ -332,6 +349,7 @@ bbox, param = crop_bbox(
     bbox, y_slice=param['y_slice'], x_slice=param['x_slice'],
     allow_outside_center=False, return_param=True)
 label = label[param['index']]
+show_img(img, bbox, True)
 
 # 4. Resizing with random interpolatation
 _, H, W = img.shape
@@ -343,6 +361,9 @@ img, params = random_flip(
     img, x_random=True, return_param=True)
 bbox = flip_bbox(
     bbox, (m_size, m_size), x_flip=params['x_flip'])
+show_img(img, bbox, True)
+
+#cv2.imwrite('out_img.jpg', img_hwc)
 
 # Preparation for SSD network
 #img -= m_mean
