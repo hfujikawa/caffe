@@ -1,0 +1,140 @@
+<Windows10>
+74  conda create --name=tf110 python=3.6 anaconda
+75  source activate tf110
+76  conda install keras=2.2.2
+77  conda list
+78  conda install opencv=3.4.1
+79  spyder &
+
+conda list
+
+cudatoolkit               9.0                           1
+cudnn                     7.1.4                 cuda9.0_0
+
+keras                     2.2.2                         0
+keras-applications        1.0.4                    py36_1
+keras-base                2.2.2                    py36_0
+keras-preprocessing       1.0.2                    py36_1
+
+tensorflow                1.10.0          gpu_py36h3514669_0
+tensorflow-base           1.10.0          gpu_py36h6e53903_0
+tensorflow-gpu            1.10.0               hf154084_0
+
+tf-pose                   0.1.1                     <pip>
+
+
+C:\Program Files\NVIDIA Corporation\NVSMI>nvidia-smi
+Sat May 25 12:54:13 2019
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 430.39       Driver Version: 430.39       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name            TCC/WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 950M   WDDM  | 00000000:01:00.0 Off |                  N/A |
+| N/A   49C    P8    N/A /  N/A |     37MiB /  2048MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+
+C:\Program Files\NVIDIA Corporation\NVSMI>nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2018 NVIDIA Corporation
+Built on Tue_Jun_12_23:08:12_Central_Daylight_Time_2018
+Cuda compilation tools, release 9.2, V9.2.148
+
+
+Anaconda -> Python3.6.8
+remove Path
+C:\Anaconda3
+C:\Anaconda3\Library\mingw-w64\bin
+C:\Anaconda3\Library\usr\bin
+C:\Anaconda3\Library\bin
+C:\Anaconda3\Scripts
+->
+C:\Python3\Scripts\
+C:\Python3\
+
+<Ubuntu16>
+CUDA driver version is insufficient for CUDA runtime version
+
+cudatoolkit               9.2                           0
+cudnn                     7.3.1                 cuda9.2_0
+
+i2m@GP62:~$ nvidia-smi
+Sat May 25 11:44:45 2019
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 396.54                 Driver Version: 396.54                    |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 950M    Off  | 00000000:01:00.0 Off |                  N/A |
+| N/A   49C    P8    N/A /  N/A |    165MiB /  2004MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0      1044      G   /usr/lib/xorg/Xorg                           125MiB |
+|    0      2501      G   compiz                                        36MiB |
+|    0      2681      G   unity-control-center                           1MiB |
++-----------------------------------------------------------------------------+
+
+i2m@GP62:~$ nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2015 NVIDIA Corporation
+Built on Tue_Aug_11_14:27:32_CDT_2015
+Cuda compilation tools, release 7.5, V7.5.17
+
+i2m@GP62:/usr/local/cuda/samples$ ./bin/x86_64/linux/release/deviceQuery
+./bin/x86_64/linux/release/deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+Detected 1 CUDA Capable device(s)
+
+Device 0: "GeForce GTX 950M"
+  CUDA Driver Version / Runtime Version          9.2 / 9.2
+  CUDA Capability Major/Minor version number:    5.0
+  Total amount of global memory:                 2004 MBytes (2101870592 bytes)
+  ( 5) Multiprocessors, (128) CUDA Cores/MP:     640 CUDA Cores
+  GPU Max Clock rate:                            928 MHz (0.93 GHz)
+  Memory Clock rate:                             2505 Mhz
+  Memory Bus Width:                              128-bit
+  L2 Cache Size:                                 2097152 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(65536), 2D=(65536, 65536), 3D=(4096, 4096, 4096)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(16384), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(16384, 16384), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  2048
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 1 copy engine(s)
+  Run time limit on kernels:                     Yes
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Compute Preemption:            No
+  Supports Cooperative Kernel Launch:            No
+  Supports MultiDevice Co-op Kernel Launch:      No
+  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0
+  Compute Mode:
+     < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
+
+deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 9.2, CUDA Runtime Version = 9.2, NumDevs = 1
+Result = PASS

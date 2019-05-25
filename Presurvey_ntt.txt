@@ -5,6 +5,29 @@ https://www.mdpi.com/2072-4292/10/5/661
 
 https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/II-3-W5/57/2015/isprsannals-II-3-W5-57-2015.pdf
 
+<SSD Priciple>
+https://avinton.com/blog/2018/03/single-shot-multibox-detector-explained1/
+
+https://github.com/Yagami360/MachineLearning_Exercises_Python_TensorFlow/tree/master/ObjectDetection_SSD_TensorFlow
+
+https://www.jeremyjordan.me/object-detection-one-stage/#ssd
+
+https://qiita.com/GushiSnow/items/8c946208de0d6a4e31e7
+
+https://medium.com/@andersasac/anchor-boxes-the-key-to-quality-object-detection-ddf9d612d4f9
+
+https://medium.com/@jonathan_hui/ssd-object-detection-single-shot-multibox-detector-for-real-time-processing-9bd8deac0e06
+
+<Grid Search>
+https://machinelearningmastery.com/grid-search-hyperparameters-deep-learning-models-python-keras/
+
+<Detection Evaluation>
+https://github.com/rafaelpadilla/Object-Detection-Metrics
+
+
+<Augmentation>
+https://github.com/albu/albumentations
+
 <Annotation Tool>
 https://lear.inrialpes.fr/people/klaeser/software_image_annotation
 Image annotation tool with image masks
