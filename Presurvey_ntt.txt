@@ -145,6 +145,7 @@ Dockerで、ホスト側のフォルダをコンテナにマウントする
 発行形態：  	単行本
 ページ数：  	328p
 ISBNコード：  	9784839962517
+->http://read.amazon.co.jp/ image2measure.com
 
 https://book.mynavi.jp/manatee/series/detail/id=65670
 機械学習で遊ぼう！APIサービスやTensorFlowを使ったサンプルレシピ集
