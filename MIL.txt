@@ -1,0 +1,19 @@
+https://www.matrox.com/imaging/media/pdf/products/mil/b_mil.pdf
+
+ For Windows
+ • 32- / 64-bit Windows 7 with SP1, 8.1i, and 10 (versions 1511 to 1709)
+ • Windows Embedded Standard 7 (with Matrox 4Sight GP and Matrox 4Sight GPm)
+ • Visual Studio 2008 with SP1, 2010 with SP1, 2012 with Update 4, 2013 with Update 5, and 2015 with Update 1 (unmanaged C++, C#, and Basic)
+ • CPython 2.7 and 3.5
+
+
+ MdispSelectWindow:
+IL does provide a method called MdispSelectWindow() wherein you pass the display id,
+ the buffer you wish to display and the clientwindowhandle
+
+
+MdigFocus オートフォーカス制御
+https://www.canon-its.co.jp/files/user/pdf/solution/image/download/detail/04_MatroxImagingLibrary_1612.pdf
+http://www.crijolanta.com.pl/pliki/matrox/podreczniki/milguide-proexamples.pdf
+
+http://www.csl.cornell.edu/~cbatten/pdfs/batten-image-processing-sem-slides-scanning2001.pdf

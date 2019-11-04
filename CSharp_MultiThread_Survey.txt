@@ -1,0 +1,23 @@
+https://docs.microsoft.com/ja-jp/azure/cognitive-services/face/face-api-how-to-topics/howtoanalyzevideo_face
+例:リアルタイムでビデオを分析する方法
+
+https://www.atmarkit.co.jp/ait/articles/1512/02/news019.html
+WPF／Windowsフォーム：時間のかかる処理をバックグラウンドで実行するには？（async／await編）
+
+https://jyuch.hatenablog.com/entry/2016/04/10/222809
+VB.NETでも処理を高速化したい　その2
+
+https://qiita.com/acple@github/items/8f63aacb13de9954c5da
+Taskを極めろ！async/await完全攻略
+
+https://qiita.com/rawr/items/6888778b53fc95c41f00
+C#でシグナル処理
+
+https://stackoverflow.com/questions/14455293/how-and-when-to-use-async-and-await
+How and when to use ‘async’ and ‘await’
+
+http://espresso3389.hatenablog.com/entry/2016/08/09/022724
+Dispatcher とか Queue とかメッセージループとか
+
+http://www.moonmile.net/blog/archives/6258
+OpenCvSharp を使ってカメラキャプチャをする

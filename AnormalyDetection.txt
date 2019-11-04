@@ -1,0 +1,8 @@
+https://jp.mathworks.com/discovery/anomaly-detection.html
+異常検知
+
+http://ni4muraano.hatenablog.com/entry/2018/07/08/210656
+【異常検知】オートエンコーダーを用いた画像の異常検知
+
+https://sinyblog.com/deaplearning/abnorm_detect_001/
+ディープラーニングで簡単な時系列データの異常検知
